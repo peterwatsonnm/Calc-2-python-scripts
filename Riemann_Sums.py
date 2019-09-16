@@ -7,18 +7,15 @@ has function mid_rule for the midpoint rule
 trap_rule for the trapezoid rule, and
 left_riemann_sum for the left riemann sum
 
-error function currently does not work
 """
 import math
 
 def mid_rule(f, a, b, n):
-    tempA = a
     delta_x = ((b-a)/n)                     #range of integral divided by number of rectangles
     
     reimannSum = 0
     for i in range(0, n):
-        reimannSum = reimannSum + (delta_x * ( f(tempA + (delta_x/2))))         #delta_x times f(midpoint)
-        tempa = (tempA + delta_x)         #increases a by delta_x every time function runs
+        reimannSum = reimannSum + (delta_x * ( f((i * delta_x) + (delta_x/2))))         #delta_x times f(midpoint), for every i starting at 0 and going to n
     return (reimannSum)
 
 def trap_rule(f, a, b, n):
@@ -28,7 +25,7 @@ def trap_rule(f, a, b, n):
     reimannSum = 0
     for i in range(0, n):
         reimannSum = reimannSum + (.5 * (delta_x) * (f(tempA) + f(tempA + delta_x)))        #area of each trapezoid
-        tempA += delta_x     #increases starting a by delta_x every time function runs
+        tempA += delta_x     #increases starting a by delta_x every time function runs --> this could also be achieved by replacing tempA with i, as done in mid_rule()
         
     return (float(reimannSum))
     
@@ -38,23 +35,35 @@ def left_riemann_sum(f, a, b, n):       #define funtion left_riemann_sum, uses p
 
     riemannSum = 0
     for i in range(0, n):        
-        riemannSum = riemannSum + f(a + i * delta_x) * delta_x      #increases a by multiplying it by i
+        riemannSum = riemannSum + f(a + i * delta_x) * delta_x      #increases a by (i * delta_x), this achieves the left hand behavhiour by starting at a
         
     return (float(riemannSum))
 
 def f(x):
-    return 3.0 * (math.exp(1/x))
+    return (1 / (1 + x ** 5))
 
-#print (trap_rule(f, 1, 2, 1000000))
-#mid_rule(f, 1, 2, 4)
+print (trap_rule(f, 0, 3, 6))
+print (mid_rule(f, 0, 3, 6))
 #left_riemann_sum(f, 1, 2, 4)
 
 #test = math.log(2)      #log base e
 #print (test)
-print ('trapezoid rule error')
-error_trap = abs(((trap_rule(f, 1, 2, 1000000)) - (trap_rule(f, 1, 2, 4))))
-print (error_trap)
-print ('')
-print('midpoint rule error')
-error_mid = abs(((mid_rule(f, 1, 2, 1000000)) - (mid_rule(f, 1, 2, 4))))
-print (error_mid)
+
+#computing error: only within precision of n = 1000000
+#print ('trapezoid rule error')
+# error_trap = abs(((trap_rule(f, 1, 2, 1000000)) - (trap_rule(f, 1, 2, 4))))
+# print (error_trap)
+# print ('')
+# print('midpoint rule error')
+# error_mid = abs(((mid_rule(f, 1, 2, 1000000)) - (mid_rule(f, 1, 2, 4))))
+# print (error_mid)
+
+#solving for n, given an error value
+# knownError = .0001
+# print ('calculataing n for error=', knownError)
+# for i in range(1, 10000):
+#     if knownError == abs(((mid_rule(f, 1, 2, i)) - (mid_rule(f, 1, 2, 4)))):
+#         print ('i is ')
+#         tempi = i
+#         print (tempi)
+# print ('done calculating')
