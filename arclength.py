@@ -1,3 +1,4 @@
+
 """
 Author: Peter Watson
 
@@ -16,9 +17,9 @@ import math
 
 #define your function here
 def f(x):
-    return (x ** 2)
+    return (math.log((1 / math.cos(x))))
 
-def arcLength(a, b, f):
+def arc_length(a, b, f):
     n = 10000000               #as n increases, accuracy of estimate increases 
     delta_x = (b - a) / n
     length = 0.0
@@ -32,5 +33,6 @@ def arcLength(a, b, f):
     print ("length rounded to 7 decimal places:")
     print (roundedLength)
 
+
 #call the function here
-arcLength(2, 5, f)
+(arc_length(0, (math.pi / 4), f))
