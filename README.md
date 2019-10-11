@@ -1,2 +1,2 @@
-# Calc-2-python-scripts
-Scripts written for solving calc 2 problems
+# python-projects
+includes scripts for solving calc problems, scripts for gui interfacing, and more
